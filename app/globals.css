@@ -1,0 +1,418 @@
+@import "tailwindcss";
+
+/* ---------- paletas ----------
+   escuro: tubo de fósforo verde e âmbar sobre preto
+   claro: papel creme, tinta verde-escura e laranja queimado (computador dos anos 80) */
+:root {
+  --c-ink: #0b0814;
+  --c-panel: #140f26;
+  --c-phosphor: #bdf3dd;
+  --c-phosphor-dim: #7570a8;
+  --c-amber: #ffc2a1;
+  --c-rust: #ff93b5;
+  --c-paper: #f1eaff;
+  --c-signal: #8fd8ff;
+  --scan-alpha: 0.2;
+  --vignette: rgba(8, 4, 22, 0.62);
+  --noise-alpha: 0.06;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --c-ink: #f7eff5;
+  --c-panel: #fffaff;
+  --c-phosphor: #3d3a74;
+  --c-phosphor-dim: #7f79a3;
+  --c-amber: #c85b7a;
+  --c-rust: #a2478f;
+  --c-paper: #241a3d;
+  --c-signal: #3f86b8;
+  --scan-alpha: 0.05;
+  --vignette: rgba(150, 110, 160, 0.2);
+  --noise-alpha: 0.09;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--c-ink);
+  --color-panel: var(--c-panel);
+  --color-phosphor: var(--c-phosphor);
+  --color-phosphor-dim: var(--c-phosphor-dim);
+  --color-amber: var(--c-amber);
+  --color-rust: var(--c-rust);
+  --color-paper: var(--c-paper);
+  --color-signal: var(--c-signal);
+  --font-name: var(--font-bebas), "Arial Narrow", Impact, sans-serif;
+  --font-display: var(--font-zen), "Segoe UI", system-ui, sans-serif;
+  --font-crt: var(--font-vt323), ui-monospace, monospace;
+  --font-mono: var(--font-plex), ui-monospace, monospace;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--c-ink);
+  color: var(--c-phosphor);
+}
+
+body {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--c-amber);
+  color: var(--c-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-amber);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+}
+
+.font-display {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- brilho de fósforo (escuro) e tinta borrada (claro) ---------- */
+.glow {
+  text-shadow:
+    0 0 5px color-mix(in srgb, currentColor 55%, transparent),
+    0 0 18px color-mix(in srgb, currentColor 28%, transparent);
+}
+
+[data-theme="light"] .glow {
+  text-shadow: 0.6px 0 0 color-mix(in srgb, currentColor 45%, transparent);
+}
+
+/* ---------- camadas CRT ---------- */
+.crt-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.crt-scan {
+  z-index: 70;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0) 0px,
+    rgb(0 0 0 / 0) 2px,
+    rgb(0 0 0 / var(--scan-alpha)) 3px,
+    rgb(0 0 0 / 0) 4px
+  );
+}
+
+.crt-vignette {
+  z-index: 71;
+  background: radial-gradient(ellipse at center, transparent 52%, var(--vignette) 100%);
+}
+
+.crt-noise {
+  z-index: 72;
+}
+
+.crt-noise::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  opacity: var(--noise-alpha);
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: noise-shift 0.9s steps(6) infinite;
+  will-change: transform;
+}
+
+/* no tema claro o ruído é grão de papel: escuro em vez de branco */
+[data-theme="light"] .crt-noise::before {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.crt-flicker {
+  z-index: 73;
+  box-shadow:
+    inset 0 0 110px color-mix(in srgb, var(--c-phosphor) 10%, transparent),
+    inset 0 0 10px color-mix(in srgb, var(--c-rust) 14%, transparent);
+  animation: edge-flicker 7s infinite;
+}
+
+.crt-roll {
+  z-index: 74;
+}
+
+.crt-roll::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20vh;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--c-phosphor) 6%, transparent),
+    transparent
+  );
+  animation: roll 9s linear infinite;
+}
+
+@keyframes noise-shift {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-5%, 3%); }
+  40% { transform: translate(4%, -6%); }
+  60% { transform: translate(-3%, 5%); }
+  80% { transform: translate(6%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes edge-flicker {
+  0%, 90%, 100% { opacity: 1; }
+  91% { opacity: 0.5; }
+  92% { opacity: 1; }
+  95% { opacity: 0.65; }
+  96% { opacity: 1; }
+}
+
+@keyframes roll {
+  from { top: -22vh; }
+  to { top: 120vh; }
+}
+
+/* ---------- texto com glitch ---------- */
+@layer components {
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow: none;
+  }
+
+  .glitch::before {
+    color: var(--c-rust);
+    transform: translate(-2px, 0);
+    clip-path: inset(0 0 55% 0);
+  }
+
+  .glitch::after {
+    color: var(--c-signal);
+    transform: translate(2px, 0);
+    clip-path: inset(55% 0 0 0);
+  }
+
+  .glitch:hover::before,
+  .glitch:focus-visible::before {
+    opacity: 0.85;
+    animation: glitch-a 0.38s steps(2) infinite;
+  }
+
+  .glitch:hover::after,
+  .glitch:focus-visible::after {
+    opacity: 0.85;
+    animation: glitch-b 0.32s steps(2) infinite;
+  }
+
+  .glitch-always::before {
+    animation: glitch-burst-a 6s steps(1) infinite;
+  }
+
+  .glitch-always::after {
+    animation: glitch-burst-b 6s steps(1) infinite;
+  }
+}
+
+@keyframes glitch-a {
+  0% { clip-path: inset(0 0 70% 0); transform: translate(-3px, 0); }
+  25% { clip-path: inset(40% 0 30% 0); transform: translate(3px, 1px); }
+  50% { clip-path: inset(70% 0 5% 0); transform: translate(-2px, -1px); }
+  75% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 0); }
+  100% { clip-path: inset(0 0 70% 0); transform: translate(-3px, 0); }
+}
+
+@keyframes glitch-b {
+  0% { clip-path: inset(60% 0 0 0); transform: translate(3px, 0); }
+  33% { clip-path: inset(20% 0 50% 0); transform: translate(-3px, 1px); }
+  66% { clip-path: inset(5% 0 75% 0); transform: translate(2px, -1px); }
+  100% { clip-path: inset(60% 0 0 0); transform: translate(3px, 0); }
+}
+
+@keyframes glitch-burst-a {
+  0%, 92%, 100% { opacity: 0; }
+  93% { opacity: 0.9; clip-path: inset(10% 0 60% 0); transform: translate(-5px, 0); }
+  96% { opacity: 0.9; clip-path: inset(55% 0 15% 0); transform: translate(4px, 1px); }
+  98% { opacity: 0; }
+}
+
+@keyframes glitch-burst-b {
+  0%, 93%, 100% { opacity: 0; }
+  94% { opacity: 0.9; clip-path: inset(50% 0 20% 0); transform: translate(5px, 0); }
+  97% { opacity: 0.9; clip-path: inset(0 0 75% 0); transform: translate(-4px, -1px); }
+  99% { opacity: 0; }
+}
+
+/* ---------- cursor, LED e ecos ---------- */
+.cursor::after {
+  content: "▮";
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+.led-blink {
+  animation: blink 1.6s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* faixa de notícias do rodapé */
+.marquee {
+  animation: marquee 48s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* personagem em pixel: pisca em degraus e as faíscas acendem e apagam */
+.px-blink {
+  animation: px-blink 5.4s steps(1) infinite;
+  opacity: 0;
+}
+
+@keyframes px-blink {
+  0%, 93% { opacity: 0; }
+  94%, 97% { opacity: 1; }
+  98%, 100% { opacity: 0; }
+}
+
+.px-twinkle {
+  animation: px-twinkle 2.4s steps(1) infinite;
+}
+
+.px-twinkle-b {
+  animation-delay: 0.8s;
+}
+
+.px-twinkle-c {
+  animation-delay: 1.6s;
+}
+
+@keyframes px-twinkle {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.15; }
+}
+
+/* nave: a chama dos motores pulsa a partir do bocal */
+.flame {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+  animation: flame 0.45s ease-in-out infinite;
+}
+
+@keyframes flame {
+  0%, 100% { transform: scaleX(1); opacity: 0.85; }
+  50% { transform: scaleX(1.5); opacity: 1; }
+}
+
+/* fios de poste balançando devagar, como na abertura de Lain */
+.wire-sway {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: wire-sway 9s ease-in-out infinite;
+}
+
+@keyframes wire-sway {
+  0%, 100% { transform: translateY(0) skewY(0deg); }
+  50% { transform: translateY(2px) skewY(0.35deg); }
+}
+
+/* personagem: pisca, o topete balança e as faíscas brilham */
+.char-blink {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: char-blink 5.2s infinite;
+}
+
+.char-sway {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: char-sway 3.4s ease-in-out infinite;
+}
+
+.char-twinkle {
+  animation: char-twinkle 2.8s ease-in-out infinite;
+}
+
+@keyframes char-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94.5% { transform: scaleY(0.08); }
+  97% { transform: scaleY(1); }
+}
+
+@keyframes char-sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(6deg); }
+}
+
+@keyframes char-twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@keyframes ping-blip {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+.blip-ping {
+  animation: ping-blip 2.2s ease-out infinite;
+}
+
+/* barra de rolagem de terminal */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-phosphor-dim) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-noise::before,
+  .crt-flicker,
+  .crt-roll::before,
+  .glitch::before,
+  .glitch::after,
+  .cursor::after,
+  .blink,
+  .led-blink,
+  .char-blink,
+  .marquee,
+  .px-blink,
+  .px-twinkle,
+  .flame,
+  .wire-sway,
+  .char-sway,
+  .char-twinkle,
+  .blip-ping {
+    animation: none !important;
+  }
+}
