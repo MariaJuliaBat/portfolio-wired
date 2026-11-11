@@ -1,11 +1,11 @@
 /**
- * Toque macio de hover, sintetizado na hora com Web Audio (sem arquivo de áudio).
- * Um "toc" arredondado, tipo madeira/marimba abafada, com um eco curtinho e quente.
+ * Sininho de hover, sintetizado na hora com Web Audio (sem arquivo de áudio).
+ * Notas agudas de uma escala pentatônica, com parciais de metal e um eco curto e brilhante.
  * O tom varia um pouquinho a cada vez para não soar repetitivo.
  */
 
 const VOLUME = 0.12; // ~12% do volume cheio
-const MIN_GAP_MS = 80; // evita metralhadora ao passar rápido por vários elementos
+const MIN_GAP_MS = 110; // evita metralhadora ao passar rápido por vários elementos
 
 let ctx: AudioContext | null = null;
 let bus: GainNode | null = null;
@@ -39,19 +39,19 @@ function getBus(c: AudioContext): GainNode {
 
   const soften = c.createBiquadFilter();
   soften.type = "lowpass";
-  soften.frequency.value = 2400;
+  soften.frequency.value = 9000;
   soften.Q.value = 0.4;
 
   // eco curtinho, escurecido a cada repetição
   const delay = c.createDelay(0.2);
-  delay.delayTime.value = 0.07;
+  delay.delayTime.value = 0.09;
   const fb = c.createGain();
-  fb.gain.value = 0.3;
+  fb.gain.value = 0.38;
   const damp = c.createBiquadFilter();
   damp.type = "lowpass";
-  damp.frequency.value = 1400;
+  damp.frequency.value = 5000;
   const wet = c.createGain();
-  wet.gain.value = 0.35;
+  wet.gain.value = 0.4;
 
   const input = c.createGain();
   input.connect(soften);
@@ -71,19 +71,22 @@ export function unlockAudio() {
   if (c && c.state === "suspended") c.resume().catch(() => {});
 }
 
-function tone(c: AudioContext, out: AudioNode, t: number, freq: number, peak: number, decay: number, type: OscillatorType) {
+/** Um parcial do sino: seno puro, ataque quase instantâneo e decaimento longo. */
+function partial(c: AudioContext, out: AudioNode, t: number, freq: number, peak: number, decay: number) {
   const osc = c.createOscillator();
-  osc.type = type;
-  osc.frequency.setValueAtTime(freq * 1.04, t);
-  osc.frequency.exponentialRampToValueAtTime(freq, t + 0.03); // leve "assentada" no tom
+  osc.type = "sine";
+  osc.frequency.value = freq;
   const g = c.createGain();
   g.gain.setValueAtTime(0.0001, t);
-  g.gain.linearRampToValueAtTime(peak, t + 0.006); // ataque macio, sem estalo
+  g.gain.linearRampToValueAtTime(peak, t + 0.002);
   g.gain.exponentialRampToValueAtTime(0.0001, t + decay);
   osc.connect(g).connect(out);
   osc.start(t);
   osc.stop(t + decay + 0.02);
 }
+
+/** Notas de uma escala pentatônica aguda: qualquer sequência soa bem junta. */
+const NOTES = [1568, 1760, 2093, 2349, 2637]; // G6 A6 C7 D7 E7
 
 export function playClick() {
   try {
@@ -97,11 +100,12 @@ export function playClick() {
 
     const out = getBus(c);
     const t = c.currentTime;
-    const base = 330 * (0.94 + Math.random() * 0.14); // ~E4, variando ±6%
+    const f = NOTES[Math.floor(Math.random() * NOTES.length)];
 
-    tone(c, out, t, base, 0.85, 0.16, "triangle"); // corpo
-    tone(c, out, t, base * 2.0, 0.22, 0.09, "sine"); // brilho suave
-    tone(c, out, t, base * 0.5, 0.45, 0.12, "sine"); // peso grave
+    // sininho: fundamental + parciais "inharmônicos" de metal (razões de sino), cada um morrendo mais rápido
+    partial(c, out, t, f, 0.55, 0.55);
+    partial(c, out, t, f * 2.76, 0.22, 0.28);
+    partial(c, out, t, f * 5.4, 0.08, 0.14);
   } catch {
     broken = true;
   }
