@@ -4,21 +4,8 @@ import { PROFILE, STACK_CORE } from "@/lib/data";
 /** Sinal: monograma, nome, título, frase, cartão de identificação e faixa de dados. */
 export function Signal() {
   return (
-    <section id="sinal" className="relative grid min-h-dvh grid-rows-[auto_1fr_auto] px-6 py-8 sm:px-12 sm:py-10">
-      <header className="rise flex items-center justify-between border-b border-line pb-5">
-        <a href="#sinal" aria-label="Maria Júlia Batista, início" className="font-serif text-2xl leading-none italic">
-          MJ<span className="text-bronze not-italic">_</span>
-        </a>
-        <span className="hidden font-mono text-[11px] tracking-[0.18em] text-dim uppercase sm:block">
-          present day · present time
-        </span>
-        <span className="flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-dim uppercase">
-          <span className="size-1.5 rounded-full bg-mint shadow-[0_0_8px_var(--c-mint)]" />
-          {PROFILE.status}
-        </span>
-      </header>
-
-      <div className="relative z-10 grid grid-cols-12 items-center gap-y-14 py-14 lg:py-10">
+    <section id="sinal" className="relative grid min-h-dvh grid-rows-[1fr_auto] px-6 pt-24 pb-8 sm:px-12 sm:pb-10">
+      <div className="relative z-10 grid grid-cols-12 items-center gap-y-14 py-10">
         <div className="col-span-12 lg:col-span-7 lg:col-start-1 xl:col-start-2 xl:col-span-6">
           <p className="rise mb-6 font-mono text-xs tracking-[0.2em] text-bronze uppercase [animation-delay:200ms]">
             {PROFILE.role}

@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { NAV } from "@/lib/data";
+import { useActiveSection } from "@/lib/useActiveSection";
 
 /** Navegação escondida: um prompt no canto que só abre quando você chega perto (ou aperta "/"). */
 export function Prompt() {
   const [open, setOpen] = useState(false);
-  const [here, setHere] = useState<string>("sinal");
+  const here = useActiveSection();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -18,18 +19,9 @@ export function Prompt() {
     };
     window.addEventListener("keydown", onKey);
 
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((en) => en.isIntersecting && setHere(en.target.id)),
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    NAV.forEach((n) => {
-      const el = document.getElementById(n.id);
-      if (el) io.observe(el);
-    });
 
     return () => {
       window.removeEventListener("keydown", onKey);
-      io.disconnect();
     };
   }, []);
 

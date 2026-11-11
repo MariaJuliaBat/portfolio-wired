@@ -1,6 +1,6 @@
 /**
  * Sininho de hover, sintetizado na hora com Web Audio (sem arquivo de áudio).
- * Notas agudas de uma escala pentatônica, com parciais de metal e um eco curto e brilhante.
+ * Notas médio-agudas de uma escala pentatônica, com parciais de metal e um eco curto e brilhante.
  * O tom varia um pouquinho a cada vez para não soar repetitivo.
  */
 
@@ -39,7 +39,7 @@ function getBus(c: AudioContext): GainNode {
 
   const soften = c.createBiquadFilter();
   soften.type = "lowpass";
-  soften.frequency.value = 9000;
+  soften.frequency.value = 5000;
   soften.Q.value = 0.4;
 
   // eco curtinho, escurecido a cada repetição
@@ -49,7 +49,7 @@ function getBus(c: AudioContext): GainNode {
   fb.gain.value = 0.38;
   const damp = c.createBiquadFilter();
   damp.type = "lowpass";
-  damp.frequency.value = 5000;
+  damp.frequency.value = 2800;
   const wet = c.createGain();
   wet.gain.value = 0.4;
 
@@ -85,8 +85,8 @@ function partial(c: AudioContext, out: AudioNode, t: number, freq: number, peak:
   osc.stop(t + decay + 0.02);
 }
 
-/** Notas de uma escala pentatônica aguda: qualquer sequência soa bem junta. */
-const NOTES = [1568, 1760, 2093, 2349, 2637]; // G6 A6 C7 D7 E7
+/** Notas de uma escala pentatônica: qualquer sequência soa bem junta. */
+const NOTES = [784, 880, 1047, 1175, 1319]; // G5 A5 C6 D6 E6
 
 export function playClick() {
   try {
@@ -103,9 +103,9 @@ export function playClick() {
     const f = NOTES[Math.floor(Math.random() * NOTES.length)];
 
     // sininho: fundamental + parciais "inharmônicos" de metal (razões de sino), cada um morrendo mais rápido
-    partial(c, out, t, f, 0.55, 0.55);
-    partial(c, out, t, f * 2.76, 0.22, 0.28);
-    partial(c, out, t, f * 5.4, 0.08, 0.14);
+    partial(c, out, t, f, 0.6, 0.6);
+    partial(c, out, t, f * 2.76, 0.12, 0.22);
+    partial(c, out, t, f * 5.4, 0.025, 0.1);
   } catch {
     broken = true;
   }
