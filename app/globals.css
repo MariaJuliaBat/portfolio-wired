@@ -28,6 +28,7 @@
 }
 
 html {
+  overflow-x: clip;
   font-size: 112.5%;
   background: #0a0b0e;
   scroll-behavior: smooth;

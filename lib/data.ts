@@ -1,7 +1,7 @@
 export const PROFILE = {
   name: "Maria Júlia Batista",
   role: "Desenvolvedora Full-Stack & Tech na Educação",
-  line: "APIs e automações que tiram o trabalho repetitivo do caminho.",
+  line: "Sistemas full-stack, automação e tecnologia aplicada à educação.",
   base: "Brasília, DF",
   school: "Computação · UnB",
   status: "Aberta a propostas",
@@ -91,7 +91,6 @@ export const MISSION = {
     { k: "lançamento", v: "Índia · 2025" },
   ],
   awards: [
-    { place: "3º", title: "Lugar geral" },
     { place: "1º", title: "Resolução de problemas" },
     { place: "1º", title: "Sustentabilidade e resp. social" },
     { place: "2º", title: "Emblemas de impacto · IBICT" },

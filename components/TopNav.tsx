@@ -9,7 +9,7 @@ export function TopNav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-void/70 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-6 px-6 py-3.5 sm:px-12">
+      <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-6 px-5 py-3.5 sm:px-12">
         <a href="#sinal" aria-label="Maria Júlia Batista, início" className="shrink-0 font-serif text-2xl leading-none italic">
           MJ<span className="text-bronze not-italic">_</span>
         </a>

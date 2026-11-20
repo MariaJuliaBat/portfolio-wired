@@ -32,7 +32,7 @@ export function Prompt() {
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
       onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setOpen(false)}
-      className="fixed bottom-6 left-6 z-40 flex items-center gap-1 bg-void/70 py-2 pr-4 font-mono text-sm backdrop-blur-sm sm:bottom-10 sm:left-12"
+      className="fixed bottom-6 left-5 z-40 hidden items-center md:flex gap-1 bg-void/70 py-2 pr-4 font-mono text-sm backdrop-blur-sm sm:bottom-10 sm:left-12"
     >
       <button
         type="button"

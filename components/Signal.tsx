@@ -3,16 +3,16 @@ import { PROFILE, STACK_CORE } from "@/lib/data";
 /** Sinal: monograma, nome, título, frase, diagrama orbital e faixa de dados. */
 export function Signal() {
   return (
-    <section id="sinal" className="relative grid min-h-dvh grid-rows-[1fr_auto] px-6 pt-24 pb-8 sm:px-12 sm:pb-10">
+    <section id="sinal" className="relative grid min-h-dvh grid-rows-[1fr_auto] px-5 pt-24 pb-8 sm:px-12 sm:pb-10">
       <div className="relative z-10 grid grid-cols-12 items-center gap-y-14 py-10">
         <div className="col-span-12 lg:col-span-7 lg:col-start-1 xl:col-start-2 xl:col-span-6">
           <p className="rise mb-6 font-mono text-sm tracking-[0.2em] text-bronze uppercase [animation-delay:200ms]">
             {PROFILE.role}
           </p>
-          <h1 className="rise font-display text-[clamp(3rem,7.2vw,6.75rem)] leading-[0.94] font-bold tracking-[-0.03em] [animation-delay:350ms]">
+          <h1 className="rise font-display text-[clamp(2.5rem,10vw,4.5rem)] lg:text-[clamp(3.5rem,6.4vw,6.75rem)] leading-[0.94] font-bold tracking-[-0.03em] [animation-delay:350ms]">
             <span className="name-gradient">Maria Júlia</span>
             <br />
-            <span className="name-gradient pl-[0.6em]">Batista</span>
+            <span className="name-gradient">Batista</span>
           </h1>
           <p className="rise mt-10 max-w-sm text-lg leading-snug text-bone/85 sm:text-xl [animation-delay:600ms]">
             {PROFILE.line}
@@ -55,8 +55,8 @@ function Datum({ k, v }: { k: string; v: string }) {
 /** Diagrama orbital: linhas finas, coordenadas discretas, um satélite que percorre a órbita. */
 function OrbitDiagram() {
   return (
-    <div aria-hidden className="rise relative col-span-12 mx-auto w-full max-w-md lg:col-span-5 lg:col-start-8 lg:max-w-none [animation-delay:500ms]">
-      <div className="glow-bronze pointer-events-none absolute top-1/2 left-1/2 aspect-square w-[130%] -translate-x-1/2 -translate-y-1/2" />
+    <div aria-hidden className="rise relative col-span-12 mx-auto w-full max-w-[280px] sm:max-w-md lg:col-span-5 lg:col-start-8 lg:max-w-none [animation-delay:500ms]">
+      <div className="glow-bronze pointer-events-none absolute top-1/2 left-1/2 aspect-square w-full lg:w-[130%] -translate-x-1/2 -translate-y-1/2" />
       <svg viewBox="0 0 460 420" fill="none" className="relative w-full font-mono" style={{ fontSize: 12 }}>
         <g stroke="rgb(255 255 255 / 0.07)" strokeWidth="1">
           <line x1="230" y1="20" x2="230" y2="400" />

@@ -23,7 +23,7 @@ export function Journey() {
   };
 
   return (
-    <section id="trajetoria" className="px-6 py-24 sm:px-12 sm:py-36">
+    <section id="trajetoria" className="px-5 py-24 sm:px-12 sm:py-36">
       <div className="grid grid-cols-12 gap-y-6">
         <SectionLabel n="04" className="col-span-12 md:col-span-2">
           trajetória
@@ -33,7 +33,7 @@ export function Journey() {
           <div className="flex flex-col gap-10">
             <div className="panel">
               <div className="titlebar">stack principal</div>
-              <ul className="flex flex-wrap gap-x-4 gap-y-5 p-8 sm:p-10">
+              <ul className="flex flex-wrap gap-x-4 gap-y-5 p-6 sm:p-10">
                 {STACK_CORE.map((s) => (
                   <li key={s} className="flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-lg">
                     <span aria-hidden className="size-2.5 rounded-full" style={{ background: STACK_DOTS[s], boxShadow: `0 0 8px ${STACK_DOTS[s]}80` }} />
@@ -54,7 +54,7 @@ export function Journey() {
           </div>
 
           <div>
-            <div role="tablist" aria-label="Trajetória" className="flex flex-wrap gap-x-8 gap-y-2 border-b border-line">
+            <div role="tablist" aria-label="Trajetória" className="flex flex-nowrap justify-between gap-x-3 border-b border-line sm:justify-start sm:gap-x-8">
               {TABS.map((t, idx) => {
                 const on = t.id === tab;
                 return (
@@ -68,7 +68,7 @@ export function Journey() {
                     tabIndex={on ? 0 : -1}
                     onClick={() => setTab(t.id)}
                     onKeyDown={(e) => onKey(e, idx)}
-                    className={`relative pb-4 font-mono text-sm tracking-[0.16em] uppercase transition-colors ${on ? "text-bone" : "text-dim hover:text-bone"}`}
+                    className={`relative pb-4 font-mono text-[12px] tracking-[0.06em] whitespace-nowrap uppercase sm:text-sm sm:tracking-[0.16em] transition-colors ${on ? "text-bone" : "text-dim hover:text-bone"}`}
                   >
                     {t.label}
                     <span aria-hidden className={`absolute inset-x-0 -bottom-px h-px bg-bronze transition-transform duration-500 ${on ? "scale-x-100" : "scale-x-0"}`} />
@@ -112,7 +112,7 @@ function Item({ l }: { l: Entry }) {
 
 export function Contact() {
   return (
-    <section id="contato" className="px-6 pt-24 pb-40 sm:px-12 sm:pt-36">
+    <section id="contato" className="px-5 pt-24 pb-40 sm:px-12 sm:pt-36">
       <div className="grid grid-cols-12 gap-y-10">
         <SectionLabel n="05" className="col-span-12 md:col-span-3">
           contato

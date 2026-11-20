@@ -4,7 +4,7 @@ import { SectionLabel } from "./SectionLabel";
 /** O marco: o picossatélite. */
 export function Mission() {
   return (
-    <section id="missao" className="px-6 py-24 sm:px-12 sm:py-36">
+    <section id="missao" className="px-5 py-24 sm:px-12 sm:py-36">
       <div className="grid grid-cols-12">
         <SectionLabel n="03" className="col-span-12 md:col-span-3">
           missão
@@ -25,7 +25,7 @@ export function Mission() {
             <p className="mt-5 max-w-lg text-base leading-relaxed text-bone/85">{MISSION.summary}</p>
 
             {/* os dois números que importam */}
-            <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2">
+            <div className="mt-10 grid gap-px border border-line bg-line md:grid-cols-2">
               <Stat big="3º" label="lugar geral" note="entre as equipes do Desafio Espacial" />
               <Stat big="2025" label="lançado na Índia" note="com apoio da Agência Espacial Brasileira" />
             </div>

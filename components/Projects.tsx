@@ -17,7 +17,7 @@ export function Projects() {
   }, [open]);
 
   return (
-    <section id="arquivo" className="px-6 py-24 sm:px-12 sm:py-36">
+    <section id="arquivo" className="px-5 py-24 sm:px-12 sm:py-36">
       <div className="grid grid-cols-12">
         <SectionLabel n="02" className="col-span-12 md:col-span-3">
           arquivo
@@ -25,21 +25,20 @@ export function Projects() {
 
         <ul className="col-span-12 mt-10 grid gap-5 md:col-span-9 md:col-start-4 md:mt-0 md:grid-cols-2">
           {PROJECTS.map((p) => (
-            <li key={p.id}>
+            <li key={p.id} className="relative">
               <button
                 type="button"
                 onClick={() => setOpen(p)}
                 className="panel window flex h-full w-full flex-col text-left"
                 aria-label={`${p.name}: ver detalhes`}
               >
-                <span className="titlebar w-full">
+                <span className="titlebar w-full pr-28">
                   <span>
-                    {p.id} — {p.kind}
+                    {p.id} — {p.kind} · {p.year}
                   </span>
-                  <span>{p.year}</span>
                 </span>
 
-                <span className="flex flex-1 flex-col p-6 sm:p-7">
+                <span className="flex flex-1 flex-col p-5 sm:p-7">
                   <span className="text-2xl font-normal tracking-tight sm:text-[1.65rem]">{p.name}</span>
                   <span className="mt-3 text-base leading-relaxed text-bone/80">{p.summary}</span>
 
@@ -61,6 +60,15 @@ export function Projects() {
                   </span>
                 </span>
               </button>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${p.name}: código no GitHub`}
+                className="absolute top-0 right-0 z-10 px-5 py-[0.7rem] font-mono text-[13px] tracking-[0.14em] text-bronze/80 transition-colors hover:text-mint focus-visible:text-mint"
+              >
+                código ↗
+              </a>
             </li>
           ))}
         </ul>
@@ -85,7 +93,7 @@ export function Projects() {
               </button>
             </div>
 
-            <div className="p-8 sm:p-10">
+            <div className="p-6 sm:p-10">
               <h3 className="text-4xl font-light tracking-tight">{open.name}</h3>
               <p className="mt-4 text-base leading-relaxed text-bone/80">{open.summary}</p>
 
