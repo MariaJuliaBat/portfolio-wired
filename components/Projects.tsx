@@ -41,10 +41,10 @@ export function Projects() {
 
                 <span className="flex flex-1 flex-col p-6 sm:p-7">
                   <span className="text-2xl font-normal tracking-tight sm:text-[1.65rem]">{p.name}</span>
-                  <span className="mt-3 text-[15px] leading-relaxed text-bone/65">{p.summary}</span>
+                  <span className="mt-3 text-base leading-relaxed text-bone/80">{p.summary}</span>
 
                   {/* aparece quando a janela ganha foco */}
-                  <span className="reveal mt-4 flex gap-2 font-mono text-[11.5px] leading-relaxed text-bone/55">
+                  <span className="reveal mt-4 flex gap-2 font-mono text-[14px] leading-relaxed text-bone/75">
                     <span className="text-bronze">↳</span>
                     {p.points[0]}
                   </span>
@@ -57,7 +57,7 @@ export function Projects() {
                         </span>
                       ))}
                     </span>
-                    <span className="reveal shrink-0 font-mono text-[10.5px] tracking-wider text-mint">abrir +</span>
+                    <span className="reveal shrink-0 font-mono text-[14px] tracking-wider text-mint">abrir +</span>
                   </span>
                 </span>
               </button>
@@ -87,9 +87,9 @@ export function Projects() {
 
             <div className="p-8 sm:p-10">
               <h3 className="text-4xl font-light tracking-tight">{open.name}</h3>
-              <p className="mt-4 text-[15px] leading-relaxed text-bone/65">{open.summary}</p>
+              <p className="mt-4 text-base leading-relaxed text-bone/80">{open.summary}</p>
 
-              <ul className="mt-8 space-y-3 border-t border-line pt-8 text-[15px] leading-relaxed text-bone/80">
+              <ul className="mt-8 space-y-3 border-t border-line pt-8 text-base leading-relaxed text-bone/80">
                 {open.points.map((pt) => (
                   <li key={pt} className="flex gap-3">
                     <span className="mt-[0.7em] h-px w-3 shrink-0 bg-bronze" />
@@ -110,7 +110,7 @@ export function Projects() {
                   href={open.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-mono text-xs tracking-wider text-mint underline-offset-4 hover:underline"
+                  className="font-mono text-sm tracking-wider text-mint underline-offset-4 hover:underline"
                 >
                   ver código ↗
                 </a>

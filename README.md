@@ -23,10 +23,6 @@ Feito com Next.js 16 (App Router), React 19 e Tailwind CSS 4.
 - **Menu discreto embaixo** (`>`): abre ao passar o mouse, ao clicar ou com a tecla `/`.
 - **Cartões de projeto** acendem a borda em menta no hover e revelam mais um detalhe.
 - **Rastro do mouse**: um fio finíssimo e curtíssimo que some em instantes (`components/OrbitTrail.tsx`).
-- **Sininho** ao passar o mouse sobre cartões e links (`lib/click.ts`). Não há arquivo de áudio:
-  o som é gerado na hora com Web Audio, em volume baixo (12%). Só toca depois do primeiro
-  clique ou tecla do visitante, porque os navegadores exigem isso, e falha em silêncio se
-  o áudio estiver bloqueado.
 - Quem usa `prefers-reduced-motion` recebe a página sem animações; telas de toque não
-  recebem rastro nem som.
+  recebem rastro.
 

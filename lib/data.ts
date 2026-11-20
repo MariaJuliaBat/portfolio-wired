@@ -1,6 +1,6 @@
 export const PROFILE = {
   name: "Maria Júlia Batista",
-  role: "Desenvolvedora Back-end & Tech na Educação",
+  role: "Desenvolvedora Full-Stack & Tech na Educação",
   line: "APIs e automações que tiram o trabalho repetitivo do caminho.",
   base: "Brasília, DF",
   school: "Computação · UnB",
@@ -101,21 +101,35 @@ export const MISSION = {
 
 export const STACK_CORE = ["Node.js", "Express", "PostgreSQL", "Python", "Next.js"];
 
-export const STACK_AUX = ["JavaScript", "TypeScript", "React", "Prisma", "Jest", "Playwright", "MySQL", "C / C++", "Arduino", "Git", "Linux"];
+export type Entry = { when: string; what: string; where: string; live?: boolean; done?: boolean };
 
-export type LogItem = { when: string; what: string; where: string; star?: boolean };
-
-export const LOG: LogItem[] = [
-  { when: "2026", what: "Bolsista · M²ICE", where: "Meninas e Mulheres no Instituto de Ciências Exatas · UnB · Scratch, Makey Makey e Arduino com meninas da rede pública" },
-  { when: "2026", what: "Estagiária de TI · concluído", where: "Escola de Governo do DF · suporte ao Moodle e Automação EGOV" },
-  { when: "2026", what: "Mediadora", where: "Câmara dos Deputados · atendimento em inglês" },
-  { when: "2025", what: "Picossatélite lançado", where: "Índia · com apoio da AEB", star: true },
-  { when: "2025", what: "Orientadora de público", where: "SESI Lab · oficinas maker, ~3 mil visitantes" },
-  { when: "2025", what: "Bolsista · Rede +Ciência nas Escolas Públicas do DF", where: "UnB · robótica e 3D em 15 escolas públicas, 720h" },
-  { when: "2025", what: "Computação (Licenciatura)", where: "Universidade de Brasília · até 2029" },
-  { when: "2024", what: "Desafio Espacial · 3º lugar geral", where: "Ideia Space · construção do picossatélite", star: true },
-  { when: "2024", what: "Desenvolvimento Full-Stack · 720h", where: "Programadores do Amanhã" },
+export const EXPERIENCE: Entry[] = [
+  { when: "2026", what: "Estagiária de TI", where: "Escola de Governo do DF · Moodle e automação", done: true },
+  { when: "2026", what: "Bolsista · Meninas nas Ciências Exatas", where: "UnB · Site oficial e oficinas tech" },
+  { when: "2026", what: "Mediadora", where: "Câmara dos Deputados · Atendimento em inglês" },
+  { when: "2025", what: "Orientadora de público", where: "SESI Lab · Oficinas maker" },
+  { when: "2025", what: "Bolsista · Rede +Ciência", where: "UnB · Robótica e 3D em escolas públicas" },
 ];
+
+export const EDUCATION: Entry[] = [
+  { when: "2026", what: "Especialização em Inteligência Artificial", where: "Programadores do Amanhã · Set–Dez 2026", live: true },
+  { when: "2025", what: "Licenciatura em Computação", where: "Universidade de Brasília · até 2029" },
+  { when: "2024", what: "Desenvolvimento Full-Stack", where: "Programadores do Amanhã · 720h" },
+];
+
+export const MILESTONES: Entry[] = [
+  { when: "2025", what: "Picossatélite lançado", where: "Índia · Apoio da AEB" },
+  { when: "2024", what: "3º lugar geral no Desafio Espacial", where: "Ideia Space" },
+];
+
+/** cor do indicador de cada tecnologia principal */
+export const STACK_DOTS: Record<string, string> = {
+  "Node.js": "#8cc84b",
+  Express: "#e9e6df",
+  PostgreSQL: "#6f9bd1",
+  Python: "#e6c45c",
+  "Next.js": "#ffffff",
+};
 
 export const LANGUAGES = ["Português · nativo", "Inglês · intermediário", "Francês · intermediário", "Japonês · básico"];
 

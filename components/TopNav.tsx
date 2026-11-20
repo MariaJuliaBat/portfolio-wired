@@ -9,13 +9,13 @@ export function TopNav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-void/70 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-6 py-3.5 sm:px-12">
+      <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-6 px-6 py-3.5 sm:px-12">
         <a href="#sinal" aria-label="Maria Júlia Batista, início" className="shrink-0 font-serif text-2xl leading-none italic">
           MJ<span className="text-bronze not-italic">_</span>
         </a>
 
         <nav aria-label="Seções" className="-mr-2 min-w-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <ul className="flex items-center gap-1 font-mono text-[11px] tracking-[0.14em] whitespace-nowrap uppercase sm:gap-2 sm:text-xs">
+          <ul className="flex items-center gap-1 font-mono text-[14px] tracking-[0.14em] whitespace-nowrap uppercase sm:gap-2 sm:text-sm">
             {NAV.map((n) => {
               const active = here === n.id;
               return (
@@ -39,7 +39,7 @@ export function TopNav() {
           </ul>
         </nav>
 
-        <span className="hidden shrink-0 font-mono text-[11px] tracking-[0.18em] text-dim uppercase lg:block">
+        <span className="hidden shrink-0 font-mono text-[14px] tracking-[0.18em] text-dim uppercase lg:block">
           present day · present time
         </span>
       </div>

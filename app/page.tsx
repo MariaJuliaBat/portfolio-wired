@@ -1,5 +1,4 @@
 import { Contact, Journey } from "@/components/Journey";
-import { HoverSound } from "@/components/HoverSound";
 import { Mission } from "@/components/Mission";
 import { OrbitTrail } from "@/components/OrbitTrail";
 import { Projects } from "@/components/Projects";
@@ -12,8 +11,7 @@ export default function Home() {
     <>
       <TopNav />
       <OrbitTrail />
-      <HoverSound />
-      <main className="relative z-10 mx-auto max-w-[1440px]">
+      <main className="relative z-10 mx-auto max-w-[1680px]">
         <Signal />
         <Projects />
         <Mission />

@@ -22,7 +22,7 @@ export function Mission() {
 
           <div className="relative p-6 sm:p-10">
             <h3 className="text-4xl font-light tracking-tight sm:text-5xl">{MISSION.title}</h3>
-            <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-bone/70">{MISSION.summary}</p>
+            <p className="mt-5 max-w-lg text-base leading-relaxed text-bone/85">{MISSION.summary}</p>
 
             {/* os dois números que importam */}
             <div className="mt-10 grid gap-px border border-line bg-line sm:grid-cols-2">
@@ -32,11 +32,11 @@ export function Mission() {
 
             <div className="mt-10 grid gap-10 lg:grid-cols-2">
               <div>
-                <p className="font-mono text-[10.5px] tracking-[0.16em] text-dim uppercase">a construção</p>
+                <p className="font-mono text-[14px] tracking-[0.16em] text-dim uppercase">a construção</p>
                 <dl className="mt-3">
                   {MISSION.facts.map((f) => (
-                    <div key={f.k} className="flex justify-between gap-4 border-b border-line py-2.5 text-sm last:border-0">
-                      <dt className="font-mono text-[11px] tracking-wider text-dim">{f.k}</dt>
+                    <div key={f.k} className="flex justify-between gap-4 border-b border-line py-2.5 text-base last:border-0">
+                      <dt className="font-mono text-[14px] tracking-wider text-dim">{f.k}</dt>
                       <dd className="text-right">{f.v}</dd>
                     </div>
                   ))}
@@ -44,10 +44,10 @@ export function Mission() {
               </div>
 
               <div>
-                <p className="font-mono text-[10.5px] tracking-[0.16em] text-dim uppercase">prêmios</p>
+                <p className="font-mono text-[14px] tracking-[0.16em] text-dim uppercase">prêmios</p>
                 <ul className="mt-3">
                   {MISSION.awards.map((a) => (
-                    <li key={a.title} className="flex items-baseline gap-4 border-b border-line py-2.5 text-sm last:border-0">
+                    <li key={a.title} className="flex items-baseline gap-4 border-b border-line py-2.5 text-base last:border-0">
                       <span className="w-7 font-serif text-xl leading-none text-bronze italic">{a.place}</span>
                       <span className="text-bone/85">{a.title}</span>
                     </li>
@@ -60,7 +60,7 @@ export function Mission() {
               href={MISSION.href}
               target="_blank"
               rel="noreferrer"
-              className="mt-10 inline-block font-mono text-xs tracking-wider text-mint/85 underline-offset-4 hover:text-mint hover:underline"
+              className="mt-10 inline-block font-mono text-sm tracking-wider text-mint/85 underline-offset-4 hover:text-mint hover:underline"
             >
               ler a matéria no Metrópoles ↗
             </a>
@@ -76,7 +76,7 @@ function Stat({ big, label, note }: { big: string; label: string; note: string }
     <div className="bg-[#121318] p-6">
       <p className="font-serif text-6xl leading-none text-bronze italic">{big}</p>
       <p className="mt-4 text-lg">{label}</p>
-      <p className="mt-1 text-[13px] text-dim">{note}</p>
+      <p className="mt-1 text-[14px] text-dim">{note}</p>
     </div>
   );
 }
